@@ -24,7 +24,7 @@ def parse_args() -> argparse.Namespace:
 
     parser.add_argument("--host", type=str, default="127.0.0.1", help="Service host")
     parser.add_argument("--port", type=int, default=7840, help="Service port")
-    add_dict_choice_argument(parser, VQA_Backends, "--backend", help="VQA Backend", default=0)
+    add_dict_choice_argument(parser, VQA_Backends, "--backend", help="VQA Backend", default="blip")
 
     return parser.parse_args()
 
