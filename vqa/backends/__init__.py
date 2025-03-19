@@ -12,5 +12,6 @@ VQA_Backends = {
     "blip2-flan": partial(Blip2Backend, "Salesforce/blip2-flan-t5-xl"),
     "vilt": ViLTBackend,
     "moondream": MoondreamBackend,
-    "smolvlm": SmolVLMBackend
+    "smolvlm": SmolVLMBackend,
+    "smolvlm2": partial(SmolVLMBackend, "HuggingFaceTB/SmolVLM2-256M-Video-Instruct")
 }

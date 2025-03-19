@@ -3,7 +3,7 @@ from typing import List
 
 import numpy as np
 from PIL import Image
-from transformers import AutoProcessor, AutoModelForVision2Seq
+from transformers import AutoProcessor, AutoModelForImageTextToText
 
 from vqa.utils import torch_utils
 
@@ -14,13 +14,13 @@ class SmolVLMBackend:
         self.torch_dtype = torch_utils.get_dtype(allow_float_16=True, allow_bfloat_16=True)
 
         # Select attention implementation based on device.
-        attn_impl = "flash_attention_2" if self.device == "cuda" else "eager"
+        attn_impl = "flash_attention_2" if torch_utils.get_device_string() == "cuda" else "eager"
 
         self.answer_regex = r"^Assistant:(.*).$"
 
         # Load processor and model with trust_remote_code enabled.
         self.processor = AutoProcessor.from_pretrained(model_name, trust_remote_code=True)
-        self.model = AutoModelForVision2Seq.from_pretrained(
+        self.model = AutoModelForImageTextToText.from_pretrained(
             model_name,
             torch_dtype=self.torch_dtype,
             _attn_implementation=attn_impl,
@@ -53,7 +53,7 @@ class SmolVLMBackend:
             inputs = inputs.to(self.device, self.torch_dtype)
 
             # Generate the output.
-            generated_ids = self.model.generate(**inputs, max_new_tokens=500)
+            generated_ids = self.model.generate(**inputs, max_new_tokens=128)
             generated_text = self.processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
 
             matches = re.findall(self.answer_regex, generated_text, re.MULTILINE)
