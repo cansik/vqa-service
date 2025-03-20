@@ -40,7 +40,7 @@ def main():
     interface = gradio.Interface(fn=process,
                                  title="Visual Question and Answer",
                                  description=f"Using {args.backend.__name__}",
-                                 inputs=[gradio.Image(), gradio.Textbox(label="Questions", lines=5)],
+                                 inputs=[gradio.Image(), gradio.Textbox(label="Questions (one per line)", lines=5)],
                                  outputs=[gradio.Json(label="Answers")],
                                  flagging_mode="never")
     interface.launch(share=False, server_name=args.host, server_port=args.port)
