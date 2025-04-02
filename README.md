@@ -2,7 +2,7 @@
 
 ## Overview
 
-The VQA Service is a machine learning application that allows users to ask questions about images and receive answers.
+The VQA Service is a machine learning based application that allows users to ask questions about images and receive answers.
 It leverages state-of-the-art models to process images and generate accurate responses to user queries. The service is
 designed to be flexible, supporting multiple backend models for different use cases.
 

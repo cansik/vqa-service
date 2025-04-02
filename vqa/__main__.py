@@ -1,6 +1,11 @@
 import argparse
 from typing import Optional
 
+from gradio.processing_utils import PUBLIC_HOSTNAME_WHITELIST
+
+PUBLIC_HOSTNAME_WHITELIST.append("localhost")
+PUBLIC_HOSTNAME_WHITELIST.append("127.0.0.1")
+
 import gradio
 import numpy as np
 from rich_argparse import ArgumentDefaultsRichHelpFormatter
