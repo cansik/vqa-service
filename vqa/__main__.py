@@ -47,7 +47,9 @@ def main():
                                  description=f"Using {args.backend.__name__}",
                                  inputs=[gradio.Image(), gradio.Textbox(label="Questions (one per line)", lines=5)],
                                  outputs=[gradio.Json(label="Answers")],
-                                 flagging_mode="never")
+                                 flagging_mode="never",
+                                 analytics_enabled=False,
+                                 delete_cache=(5, 1))
     interface.launch(share=False, server_name=args.host, server_port=args.port)
 
 
