@@ -2,9 +2,7 @@
 torch~=2.6.0
 torchvision~=0.21.0
 
-transformers~=4.49.0
-# for smalvlm2, use:
-# git+https://github.com/huggingface/transformers@v4.49.0-SmolVLM-2
+transformers~=4.51.2
 num2words~=0.5.14
 accelerate~=1.5.2
 
