@@ -4,10 +4,11 @@ import numpy as np
 from PIL import Image
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
+from vqa.backends.BaseVQABackend import BaseVQABackend
 from vqa.utils import torch_utils
 
 
-class MoondreamBackend:
+class MoondreamBackend(BaseVQABackend):
     def __init__(self, model_name: str = "vikhyatk/moondream2", revision: str = "2025-01-09"):
         self.device = torch_utils.get_device()
         self.dtype = torch_utils.get_dtype(allow_float_16=True)
