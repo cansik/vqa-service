@@ -1,20 +1,20 @@
 from typing import List
 
+import numpy as np
 import torch
 from transformers import AutoProcessor, BlipForQuestionAnswering
 
-import numpy as np
-
-from vqa.utils import torch_utils
 from vqa.backends.BaseVQABackend import BaseVQABackend
+from vqa.utils import torch_utils
 
 
 class BlipBackend(BaseVQABackend):
-    def __init__(self):
+    def __init__(self, model_name: str = "Salesforce/blip-vqa-base"):
+        self.model_name = model_name
         self.device = torch_utils.get_device_string()
 
-        self.model = BlipForQuestionAnswering.from_pretrained("Salesforce/blip-vqa-base").to(self.device)
-        self.processor = AutoProcessor.from_pretrained("Salesforce/blip-vqa-base")
+        self.model = BlipForQuestionAnswering.from_pretrained(model_name).to(self.device)
+        self.processor = AutoProcessor.from_pretrained(model_name)
 
     def process(self, image: np.ndarray, questions: List[str]) -> List[str]:
         # preprocess image
@@ -59,3 +59,7 @@ class BlipBackend(BaseVQABackend):
                 answers.append(answer)
 
             return answers
+
+    @property
+    def name(self) -> str:
+        return f"Blip with model {self.model_name}"

@@ -10,6 +10,7 @@ from vqa.utils import torch_utils
 
 class SmolVLMBackend:
     def __init__(self, model_name: str = "HuggingFaceTB/SmolVLM-256M-Instruct"):
+        self.model_name = model_name
         self.device = torch_utils.get_device()
         self.torch_dtype = torch_utils.get_dtype(allow_float_16=True, allow_bfloat_16=True)
 
@@ -64,3 +65,7 @@ class SmolVLMBackend:
             results.append(last_answer.strip())
 
         return results
+
+    @property
+    def name(self) -> str:
+        return f"SmolVLM with model {self.model_name}"

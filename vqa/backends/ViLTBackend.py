@@ -4,10 +4,11 @@ from vqa.utils import torch_utils
 
 
 class ViLTBackend:
-    def __init__(self):
+    def __init__(self, model_name: str = "dandelin/vilt-b32-finetuned-vqa"):
+        self.model_name = model_name
         self.device = torch_utils.get_device_string()
-        self.processor = ViltProcessor.from_pretrained("dandelin/vilt-b32-finetuned-vqa")
-        self.model = ViltForQuestionAnswering.from_pretrained("dandelin/vilt-b32-finetuned-vqa").to(self.device)
+        self.processor = ViltProcessor.from_pretrained(model_name)
+        self.model = ViltForQuestionAnswering.from_pretrained(model_name).to(self.device)
 
     def process(self, image, questions):
         results = []
@@ -23,3 +24,7 @@ class ViLTBackend:
             results.append(result)
 
         return results
+
+    @property
+    def name(self) -> str:
+        return f"ViLT with model {self.model_name}"

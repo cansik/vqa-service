@@ -42,3 +42,7 @@ class NamoBackend(BaseVQABackend):
             results.append(answer.strip())
 
         return results
+
+    @property
+    def name(self) -> str:
+        return f"Namo"

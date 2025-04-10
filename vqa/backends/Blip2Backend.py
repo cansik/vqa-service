@@ -3,11 +3,13 @@ from typing import List
 import numpy as np
 from transformers import Blip2Processor, Blip2ForConditionalGeneration
 
+from vqa.backends.BaseVQABackend import BaseVQABackend
 from vqa.utils import torch_utils
 
 
-class Blip2Backend:
+class Blip2Backend(BaseVQABackend):
     def __init__(self, model_name: str = "Salesforce/blip2-opt-2.7b"):
+        self.model_name = model_name
         self.device = torch_utils.get_device_string()
 
         self.processor = Blip2Processor.from_pretrained(model_name)
@@ -23,3 +25,7 @@ class Blip2Backend:
             results.append(result)
 
         return results
+
+    @property
+    def name(self) -> str:
+        return f"Blip2 with model {self.model_name}"

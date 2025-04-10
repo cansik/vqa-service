@@ -10,6 +10,7 @@ from vqa.utils import torch_utils
 
 class MoondreamBackend(BaseVQABackend):
     def __init__(self, model_name: str = "vikhyatk/moondream2", revision: str = "2025-01-09"):
+        self.model_name = model_name
         self.device = torch_utils.get_device()
         self.dtype = torch_utils.get_dtype(allow_float_16=True)
 
@@ -28,3 +29,7 @@ class MoondreamBackend(BaseVQABackend):
             results.append(answer.strip())
 
         return results
+
+    @property
+    def name(self) -> str:
+        return f"Moondream with model {self.model_name}"
