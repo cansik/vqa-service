@@ -57,14 +57,24 @@ python -m vqa --host 0.0.0.0 --port 8000 --backend blip2
 Once the service is running, you can access it through a web interface provided by Gradio. Open your web browser and
 navigate to `http://<host>:<port>` to interact with the service.
 
-## Backends
+## Supported Models
 
-The service supports multiple backend models, including:
+The following VLM backends are supported:
 
-- `blip`
-- `blip2`
-- `blip2-flan`
-- `vilt`
-- `moondream`
+| Backend ID | Model | Description |
+|------------|-------|-------------|
+| `blip` | Salesforce/blip-vqa-base | BLIP base model for visual question answering |
+| `blip2` | Salesforce/blip2-opt-2.7b | BLIP2 with OPT 2.7B language model |
+| `blip2-flan` | Salesforce/blip2-flan-t5-xl | BLIP2 with Flan-T5-XL language model |
+| `vilt` | dandelin/vilt-b32-finetuned-vqa | ViLT model fine-tuned for VQA tasks |
+| `vlmmlx` | mlx-community/Qwen2-VL-2B-Instruct-4bit | Default MLX-based VLM for Apple Silicon |
+| `vlmmlx-phi35` | mlx-community/Phi-3.5-vision-instruct-4bit | Phi-3.5 Vision model optimized for MLX |
+| `vlmmlx-smolvlm2` | mlx-community/SmolVLM2-500M-Video-Instruct-mlx-8bit-skip-vision | SmolVLM2 optimized for MLX |
+| `namo` | - | Namo VLM model |
+| `moondream` | vikhyatk/moondream2 | Moondream2 model with GPU support |
+| `moondream-cpu` | vikhyatk/moondream2 | Moondream2 model optimized for CPU inference |
+| `smolvlm` | HuggingFaceTB/SmolVLM-256M-Instruct | Lightweight VLM model |
+| `smolvlm2` | HuggingFaceTB/SmolVLM2-256M-Video-Instruct | SmolVLM2 with video instruction capabilities |
+
 
 Each backend offers different capabilities and performance characteristics.
