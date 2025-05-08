@@ -13,7 +13,7 @@ pyvips~=2.2.3
 pyvips-binary~=8.16.0
 
 # extra moondream-cpu
-moondream~=0.0.6
+moondream~=0.1.0
 
 # extra mlx
 mlx-vlm~=0.1.21
