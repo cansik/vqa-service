@@ -30,6 +30,9 @@ class VLMForMLXBackend(BaseVQABackend):
             )
 
             output = generate(self.model, self.processor, formatted_prompt, pil_image, verbose=False)
+            if isinstance(output, tuple):
+                output = output[0]
+
             results.append(output.strip())
 
         return results
